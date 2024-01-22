@@ -16,11 +16,16 @@ app.set("views", "views");//views folder path that we created
 app.set("view engine", "ejs");
 
 //4-Router related Code
+app.post("/create-item", (req, res) => {
+  console.log(req.body);
+  res.json({ test: "success"});
+});
+
 app.get("/", function(req, res){
-  res.end(`<h1>HELLO WORLD</h1>`);
+  res.render("plan");
 });
 const server = http.createServer(app);
 let PORT = 3001;
 server.listen(PORT, function() {
-console.log(`The server successfully run on PORT: ${PORT}`)
+console.log(`The server successfully run on PORT: ${PORT}, http://localhost:${PORT}`)
 });
