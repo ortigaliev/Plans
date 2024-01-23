@@ -38,6 +38,26 @@ app.post("/delete-item", (req, res) => {
   );
 });
 
+app.post("/edit-item", (req, res) => {
+  const data = req.body;
+  console.log(data);
+  db.collection("aim").findOneAndUpdate(
+    { _id: new mongodb.ObjectId(data.id) },
+    { $set: { reja: data.new_input } },
+    function (err, data) {
+      res.json({state: "success"});
+    }
+  );
+});
+
+app.post("/delete-all", (req, res) => {
+  if(req.body.delete_all) {
+    db.collection("aim").deleteMany(function () {
+      res.json({ state: "Are you sure to delete all?"});
+    });
+  }
+});
+
 app.get("/", function(req, res){
   console.log("user entered /");
   db.collection("aim").find().toArray((err, data) => {
