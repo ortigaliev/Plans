@@ -12,25 +12,40 @@
   <div class="container">
     <h1 class="display-4 text-center py-1">My Plans</h1>
 
-    <div class="jumbotron p-3 shadow-sm" style="background-color: beige">
+    <div class="jumbotron p-3 shadow-sm mb-5" style="background-color: beige">
       <form id="create-form" action="/create-item" method="POST">
         <div class="d-flex align-items-center">
           <input
           class="form-control mr-3"
           id="create-field"
-          name="item"
+          name="plan"
           autofocus
           autocomplete="off"
           style="flex: 1"
           type="text"
           />
 
-          <button class="btn btn-primary" style="border-radius: 20px">Add new Plan</button>
+          <button class="btn btn-primary ml-3" style="border-radius: 20px">Add new Plan</button>
         </div>
       </form>
     </div>
 
-    <button id="clear-all" type="button" class="btn btn-danger" style="margin-top: 30px">Clear All</button>
+
+    <ul id="item-list" class="list-group pb-5">
+      <% items.map(function(item) { %>
+        <li class="list-group-item list-group-item-info d-flex align-item-center justify-content-between">
+          <span class="item-text"><%=item.plan%></span>
+          <div>
+            <button data-id="<%=item._id%>" class="edit-me btn btn-secondary btn-sm mr-1">Change</button>
+            <button data-id="<%=item._id%>" class="delete-me btn btn-danger btn-sm">Remove</button>
+          </div>
+
+        </li>
+      <% }) %>
+
+    </ul>
+
+    <button id="clear-all" type="button" class="btn btn-danger">Clear All</button>
   </div>
 
 

@@ -20,11 +20,29 @@ app.set("view engine", "ejs");
 
 //4-Router related Code
 app.post("/create-item", (req, res) => {
-  //TODO: code with db here
+  console.log("user entered /create-item");
+  console.log(req.body);
+  const new_plan = req.body.plan;
+  db.collection("aim").insertOne({ plan: new_plan}, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end("Something went wrong");
+    } else {
+      res.end("successfully added");
+    }
+  });
 });
 
 app.get("/", function(req, res){
-  res.render("plan");
+  console.log("user entered /");
+  db.collection("aim").find().toArray((err, data) => {
+    if (err) {
+      console.log(err);
+      res.end("Something went wrong");
+    } else {
+      res.render("plan", {items: data});
+    }
+  });
 });
 
 
